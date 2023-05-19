@@ -11,20 +11,10 @@ templates:
   - "templates/postgres.template.yml"
   - "templates/redis.template.yml"
   - "templates/web.template.yml"
-  ## Uncomment the next line to enable the IPv6 listener
-  #- "templates/web.ipv6.template.yml"
   - "templates/web.ratelimited.template.yml"
-  ## Uncomment these two lines if you wish to add Lets Encrypt (https)
-  #- "templates/web.ssl.template.yml"
-  #- "templates/web.letsencrypt.ssl.template.yml"
-
-## which TCP/IP ports should this container expose?
-## If you want Discourse to share a port with another webserver like Apache or nginx,
-## see https://meta.discourse.org/t/17247 for details
-expose:
-  - "80:80"   # http
-  - "443:443" # https
-
+  - "templates/web.ipv6.template.yml"
+  - "templates/web.socketed.template.yml"
+  
 params:
   db_default_text_search_config: "pg_catalog.english"
 
@@ -58,7 +48,7 @@ env:
 
   ## TODO: List of comma delimited emails that will be made admin and developer
   ## on initial signup example 'user1@example.com,user2@example.com'
-  DISCOURSE_DEVELOPER_EMAILS: 'me@example.com,you@example.com'
+  DISCOURSE_DEVELOPER_EMAILS: 'admin@discourse.pub'
 
   ## TODO: The SMTP mail server used to validate new accounts and send notifications
   # SMTP ADDRESS, username, and password are required
